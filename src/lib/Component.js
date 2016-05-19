@@ -2,29 +2,29 @@ const components = [];
 
 export default class Component {
 	constructor(model = {}, target = document.body) {
-			// data
-			this.model = model;
-			// create HTML element
-			this.element = document.createElement('div');
-			this.target = target;
-			// add to DOM
-			this.target.appendChild(this.element);
-			// track all components
-			components.push(this);
-			// delay first render until loaded
-			setTimeout(() => this.render());
+		// data
+		this.model = model;
+		// create HTML element
+		this.element = document.createElement('div');
+		this.target = target;
+		// add to DOM
+		this.target.appendChild(this.element);
+		// track all components
+		components.push(this);
+		// delay first render until loaded
+		setTimeout(() => this.render());
+	}
+	register(name) {
+		let self = this;
+		let prototype = Object.create(HTMLElement.prototype)
+		prototype.createdCallback = function() {
+			let shadow = this.createShadowRoot();
+			shadow.appendChild(self.element);
 		}
-		// register(name) {
-		// 	let self = this;
-		// 	let prototype = Object.create(HTMLElement.prototype)
-		// 	prototype.createdCallback = function() {
-		// 		let shadow = this.createShadowRoot();
-		// 		shadow.appendChild(self.element);
-		// 	}
-		// 	document.registerElement(name, {
-		// 		prototype
-		// 	});
-		// }
+		document.registerElement(name, {
+			prototype
+		});
+	}
 	addEvent(...events) {
 		events.forEach((eventType) => {
 			this.element.addEventListener(eventType, this);

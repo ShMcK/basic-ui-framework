@@ -1,6 +1,7 @@
 import Todos from './components/Todos';
 import TodoInput from './components/TodoInput';
 import TodoFilter from './components/TodoFilter';
+import TodoEl from './components/TodoEl';
 
 const model = {
 	todos: [{
@@ -19,3 +20,5 @@ let todos = new Todos(model, app);
 
 let filters = document.getElementsByClassName('filters')[0];
 let filterAll = new TodoFilter(model, filters);
+
+let demo = new TodoEl('demo-example', model);
