@@ -1,5 +1,6 @@
-const Todos = require('./Todos');
-const Button = require('./Button');
+import Todos from './components/Todos';
+import TodoInput from './components/TodoInput';
+import TodoFilter from './components/TodoFilter';
 
 const model = {
 	todos: [{
@@ -11,5 +12,10 @@ const model = {
 	}]
 };
 
-let todos = new Todos(model);
-let submit = new Button(model);
+let app = document.getElementById('todos');
+
+let todoInput = new TodoInput(model, app);
+let todos = new Todos(model, app);
+
+let filters = document.getElementsByClassName('filters')[0];
+let filterAll = new TodoFilter(model, filters);

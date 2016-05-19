@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const PATHS = {
-	src: path.join(__dirname, 'src', 'index.js'),
+	src: path.join(__dirname, 'src'),
 	build: path.join(__dirname, 'build')
 };
 
@@ -11,23 +11,20 @@ module.exports = {
 		src: PATHS.src
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js']
 	},
 	output: {
 		path: PATHS.build,
 		filename: 'bundle.js'
 	},
 	module: {
-		query: {
-			presets: ['es2015', 'react']
-		},
 		loaders: [{
 			test: /\.css$/,
 			loaders: ['style', 'css'],
 			include: PATHS.src
 		}, {
-			test: /\.jsx?$/,
-			loaders: ['babel'],
+			test: /\.js$/,
+			loader: 'babel',
 			include: PATHS.src,
 			exclude: /node_modules/
 		}]
